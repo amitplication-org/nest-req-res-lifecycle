@@ -13,6 +13,7 @@ import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { IsDate, IsString, IsOptional } from "class-validator";
 import { Type } from "class-transformer";
+import { IsUserAlreadyExist } from "../pipes/is-user-exists.pipe";
 @ObjectType()
 class User {
   @ApiProperty({
@@ -74,6 +75,9 @@ class User {
   @ApiProperty({
     required: true,
     type: String,
+  })
+  @IsUserAlreadyExist({
+    message: "username already exists. Choose another username.",
   })
   @IsString()
   @Field(() => String)

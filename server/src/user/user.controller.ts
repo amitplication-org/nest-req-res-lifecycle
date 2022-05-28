@@ -3,6 +3,7 @@ import * as swagger from "@nestjs/swagger";
 import * as nestAccessControl from "nest-access-control";
 import { UserService } from "./user.service";
 import { UserControllerBase } from "./base/user.controller.base";
+import { Get, Param } from "@nestjs/common";
 
 @swagger.ApiTags("users")
 @common.Controller("users")
@@ -13,5 +14,10 @@ export class UserController extends UserControllerBase {
     protected readonly rolesBuilder: nestAccessControl.RolesBuilder
   ) {
     super(service, rolesBuilder);
+  }
+
+  @Get(":username")
+  findOneByName(@Param("username") username: string) {
+    return this.service.findOneByName(username);
   }
 }
