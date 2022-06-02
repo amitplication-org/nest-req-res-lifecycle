@@ -12,6 +12,7 @@ import {
 } from "react-admin";
 
 import { ADDRESS_TITLE_FIELD } from "./AddressTitle";
+import { ORDER_TITLE_FIELD } from "../order/OrderTitle";
 
 export const AddressShow = (props: ShowProps): React.ReactElement => {
   return (
@@ -44,6 +45,27 @@ export const AddressShow = (props: ShowProps): React.ReactElement => {
             <TextField label="ID" source="id" />
             <TextField label="Last Name" source="lastName" />
             <TextField label="Phone" source="phone" />
+            <DateField source="updatedAt" label="Updated At" />
+          </Datagrid>
+        </ReferenceManyField>
+        <ReferenceManyField
+          reference="Shipment"
+          target="AddressId"
+          label="Shipments"
+        >
+          <Datagrid rowClick="show">
+            <ReferenceField
+              label="Address"
+              source="address.id"
+              reference="Address"
+            >
+              <TextField source={ADDRESS_TITLE_FIELD} />
+            </ReferenceField>
+            <DateField source="createdAt" label="Created At" />
+            <TextField label="ID" source="id" />
+            <ReferenceField label="Order" source="order.id" reference="Order">
+              <TextField source={ORDER_TITLE_FIELD} />
+            </ReferenceField>
             <DateField source="updatedAt" label="Updated At" />
           </Datagrid>
         </ReferenceManyField>

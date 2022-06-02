@@ -27,6 +27,8 @@ import { AddressFindUniqueArgs } from "./AddressFindUniqueArgs";
 import { Address } from "./Address";
 import { CustomerFindManyArgs } from "../../customer/base/CustomerFindManyArgs";
 import { Customer } from "../../customer/base/Customer";
+import { ShipmentFindManyArgs } from "../../shipment/base/ShipmentFindManyArgs";
+import { Shipment } from "../../shipment/base/Shipment";
 import { AddressService } from "../address.service";
 
 @graphql.Resolver(() => Address)
@@ -160,6 +162,26 @@ export class AddressResolverBase {
     @graphql.Args() args: CustomerFindManyArgs
   ): Promise<Customer[]> {
     const results = await this.service.findCustomers(parent.id, args);
+
+    if (!results) {
+      return [];
+    }
+
+    return results;
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => [Shipment])
+  @nestAccessControl.UseRoles({
+    resource: "Shipment",
+    action: "read",
+    possession: "any",
+  })
+  async shipments(
+    @graphql.Parent() parent: Address,
+    @graphql.Args() args: ShipmentFindManyArgs
+  ): Promise<Shipment[]> {
+    const results = await this.service.findShipments(parent.id, args);
 
     if (!results) {
       return [];

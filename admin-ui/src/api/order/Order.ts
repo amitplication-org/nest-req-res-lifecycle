@@ -1,5 +1,6 @@
 import { Customer } from "../customer/Customer";
 import { Product } from "../product/Product";
+import { Shipment } from "../shipment/Shipment";
 
 export type Order = {
   createdAt: Date;
@@ -8,6 +9,7 @@ export type Order = {
   id: string;
   product?: Product | null;
   quantity: number | null;
+  shipments?: Array<Shipment>;
   totalPrice: number | null;
   updatedAt: Date;
 };

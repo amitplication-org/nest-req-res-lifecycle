@@ -16,6 +16,7 @@ import { Type } from "class-transformer";
 import { IsOptional, ValidateNested } from "class-validator";
 import { CustomerListRelationFilter } from "../../customer/base/CustomerListRelationFilter";
 import { StringFilter } from "../../util/StringFilter";
+import { ShipmentListRelationFilter } from "../../shipment/base/ShipmentListRelationFilter";
 import { IntNullableFilter } from "../../util/IntNullableFilter";
 @InputType()
 class AddressWhereInput {
@@ -74,6 +75,18 @@ class AddressWhereInput {
     nullable: true,
   })
   id?: StringFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => ShipmentListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => ShipmentListRelationFilter)
+  @IsOptional()
+  @Field(() => ShipmentListRelationFilter, {
+    nullable: true,
+  })
+  shipments?: ShipmentListRelationFilter;
 
   @ApiProperty({
     required: false,

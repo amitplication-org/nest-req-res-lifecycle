@@ -1,4 +1,5 @@
 import * as React from "react";
+
 import {
   Create,
   SimpleForm,
@@ -6,9 +7,13 @@ import {
   ReferenceInput,
   SelectInput,
   NumberInput,
+  ReferenceArrayInput,
+  SelectArrayInput,
 } from "react-admin";
+
 import { CustomerTitle } from "../customer/CustomerTitle";
 import { ProductTitle } from "../product/ProductTitle";
+import { ShipmentTitle } from "../shipment/ShipmentTitle";
 
 export const OrderCreate = (props: CreateProps): React.ReactElement => {
   return (
@@ -26,6 +31,14 @@ export const OrderCreate = (props: CreateProps): React.ReactElement => {
           <SelectInput optionText={ProductTitle} />
         </ReferenceInput>
         <NumberInput step={1} label="Quantity" source="quantity" />
+        <ReferenceArrayInput
+          source="shipments"
+          reference="Shipment"
+          parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
+          format={(value: any) => value && value.map((v: any) => v.id)}
+        >
+          <SelectArrayInput optionText={ShipmentTitle} />
+        </ReferenceArrayInput>
         <NumberInput step={1} label="Total Price" source="totalPrice" />
       </SimpleForm>
     </Create>
