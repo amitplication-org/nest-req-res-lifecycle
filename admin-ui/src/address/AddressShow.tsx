@@ -66,6 +66,7 @@ export const AddressShow = (props: ShowProps): React.ReactElement => {
             <ReferenceField label="Order" source="order.id" reference="Order">
               <TextField source={ORDER_TITLE_FIELD} />
             </ReferenceField>
+            <TextField label="Tracking Number" source="trackingNumber" />
             <DateField source="updatedAt" label="Updated At" />
           </Datagrid>
         </ReferenceManyField>

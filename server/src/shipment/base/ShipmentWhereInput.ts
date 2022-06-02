@@ -16,6 +16,7 @@ import { ValidateNested, IsOptional } from "class-validator";
 import { Type } from "class-transformer";
 import { StringFilter } from "../../util/StringFilter";
 import { OrderWhereUniqueInput } from "../../order/base/OrderWhereUniqueInput";
+import { StringNullableFilter } from "../../util/StringNullableFilter";
 @InputType()
 class ShipmentWhereInput {
   @ApiProperty({
@@ -52,5 +53,16 @@ class ShipmentWhereInput {
     nullable: true,
   })
   order?: OrderWhereUniqueInput;
+
+  @ApiProperty({
+    required: false,
+    type: StringNullableFilter,
+  })
+  @Type(() => StringNullableFilter)
+  @IsOptional()
+  @Field(() => StringNullableFilter, {
+    nullable: true,
+  })
+  trackingNumber?: StringNullableFilter;
 }
 export { ShipmentWhereInput };

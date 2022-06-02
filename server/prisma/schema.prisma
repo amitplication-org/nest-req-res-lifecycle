@@ -19,17 +19,18 @@ model User {
 }
 
 model Order {
-  createdAt  DateTime   @default(now())
-  customer   Customer?  @relation(fields: [customerId], references: [id])
-  customerId String?
-  discount   Float?
-  id         String     @id @default(cuid())
-  product    Product?   @relation(fields: [productId], references: [id])
-  productId  String?
-  quantity   Int?
-  shipments  Shipment[]
-  totalPrice Int?
-  updatedAt  DateTime   @updatedAt
+  createdAt   DateTime  @default(now())
+  customer    Customer? @relation(fields: [customerId], references: [id])
+  customerId  String?
+  discount    Float?
+  id          String    @id @default(cuid())
+  product     Product?  @relation(fields: [productId], references: [id])
+  productId   String?
+  quantity    Int?
+  shipments   Shipment? @relation(fields: [shipmentsId], references: [id])
+  shipmentsId String?
+  totalPrice  Int?
+  updatedAt   DateTime  @updatedAt
 }
 
 model Customer {
@@ -69,11 +70,11 @@ model Product {
 }
 
 model Shipment {
-  address   Address? @relation(fields: [addressId], references: [id])
-  addressId String?
-  createdAt DateTime @default(now())
-  id        String   @id @default(cuid())
-  order     Order?   @relation(fields: [orderId], references: [id])
-  orderId   String?
-  updatedAt DateTime @updatedAt
+  address        Address? @relation(fields: [addressId], references: [id])
+  addressId      String?
+  createdAt      DateTime @default(now())
+  id             String   @id @default(cuid())
+  order          Order
+  trackingNumber String?
+  updatedAt      DateTime @updatedAt
 }

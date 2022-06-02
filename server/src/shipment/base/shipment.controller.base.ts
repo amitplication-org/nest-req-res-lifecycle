@@ -77,6 +77,7 @@ export class ShipmentControllerBase {
           },
         },
 
+        trackingNumber: true,
         updatedAt: true,
       },
     });
@@ -112,6 +113,7 @@ export class ShipmentControllerBase {
           },
         },
 
+        trackingNumber: true,
         updatedAt: true,
       },
     });
@@ -148,6 +150,7 @@ export class ShipmentControllerBase {
           },
         },
 
+        trackingNumber: true,
         updatedAt: true,
       },
     });
@@ -207,6 +210,7 @@ export class ShipmentControllerBase {
             },
           },
 
+          trackingNumber: true,
           updatedAt: true,
         },
       });
@@ -251,6 +255,7 @@ export class ShipmentControllerBase {
             },
           },
 
+          trackingNumber: true,
           updatedAt: true,
         },
       });

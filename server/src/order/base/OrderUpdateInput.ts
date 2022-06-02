@@ -15,7 +15,7 @@ import { CustomerWhereUniqueInput } from "../../customer/base/CustomerWhereUniqu
 import { ValidateNested, IsOptional, IsNumber, IsInt } from "class-validator";
 import { Type } from "class-transformer";
 import { ProductWhereUniqueInput } from "../../product/base/ProductWhereUniqueInput";
-import { ShipmentUpdateManyWithoutOrdersInput } from "./ShipmentUpdateManyWithoutOrdersInput";
+import { ShipmentWhereUniqueInput } from "../../shipment/base/ShipmentWhereUniqueInput";
 @InputType()
 class OrderUpdateInput {
   @ApiProperty({
@@ -66,15 +66,15 @@ class OrderUpdateInput {
 
   @ApiProperty({
     required: false,
-    type: () => ShipmentUpdateManyWithoutOrdersInput,
+    type: () => ShipmentWhereUniqueInput,
   })
   @ValidateNested()
-  @Type(() => ShipmentUpdateManyWithoutOrdersInput)
+  @Type(() => ShipmentWhereUniqueInput)
   @IsOptional()
-  @Field(() => ShipmentUpdateManyWithoutOrdersInput, {
+  @Field(() => ShipmentWhereUniqueInput, {
     nullable: true,
   })
-  shipments?: ShipmentUpdateManyWithoutOrdersInput;
+  shipments?: ShipmentWhereUniqueInput | null;
 
   @ApiProperty({
     required: false,

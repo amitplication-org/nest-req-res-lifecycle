@@ -49,7 +49,18 @@ class Shipment {
   @ValidateNested()
   @Type(() => Order)
   @IsOptional()
-  order?: Order | null;
+  order?: Order;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  trackingNumber!: string | null;
 
   @ApiProperty({
     required: true,

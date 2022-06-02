@@ -338,6 +338,7 @@ export class AddressControllerBase {
           },
         },
 
+        trackingNumber: true,
         updatedAt: true,
       },
     });
