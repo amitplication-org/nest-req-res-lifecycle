@@ -25,6 +25,8 @@ import { DeleteOrderArgs } from "./DeleteOrderArgs";
 import { OrderFindManyArgs } from "./OrderFindManyArgs";
 import { OrderFindUniqueArgs } from "./OrderFindUniqueArgs";
 import { Order } from "./Order";
+import { ShipmentFindManyArgs } from "../../shipment/base/ShipmentFindManyArgs";
+import { Shipment } from "../../shipment/base/Shipment";
 import { Customer } from "../../customer/base/Customer";
 import { Product } from "../../product/base/Product";
 import { OrderService } from "../order.service";
@@ -170,6 +172,26 @@ export class OrderResolverBase {
       }
       throw error;
     }
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => [Shipment])
+  @nestAccessControl.UseRoles({
+    resource: "Shipment",
+    action: "read",
+    possession: "any",
+  })
+  async shipments(
+    @graphql.Parent() parent: Order,
+    @graphql.Args() args: ShipmentFindManyArgs
+  ): Promise<Shipment[]> {
+    const results = await this.service.findShipments(parent.id, args);
+
+    if (!results) {
+      return [];
+    }
+
+    return results;
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)

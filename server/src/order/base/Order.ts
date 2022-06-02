@@ -22,6 +22,7 @@ import {
 import { Type } from "class-transformer";
 import { Customer } from "../../customer/base/Customer";
 import { Product } from "../../product/base/Product";
+import { Shipment } from "../../shipment/base/Shipment";
 @ObjectType()
 class Order {
   @ApiProperty({
@@ -79,6 +80,15 @@ class Order {
     nullable: true,
   })
   quantity!: number | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => [Shipment],
+  })
+  @ValidateNested()
+  @Type(() => Shipment)
+  @IsOptional()
+  shipments?: Array<Shipment>;
 
   @ApiProperty({
     required: false,

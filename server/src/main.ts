@@ -12,7 +12,7 @@ import {
   // eslint-disable-next-line
 } from "./swagger";
 
-const { PORT = 8080 } = process.env;
+const { PORT = 3000 } = process.env;
 
 async function main() {
   const app = await NestFactory.create(AppModule, { cors: true });
