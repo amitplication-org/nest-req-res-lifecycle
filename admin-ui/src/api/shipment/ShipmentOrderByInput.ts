@@ -5,5 +5,6 @@ export type ShipmentOrderByInput = {
   createdAt?: SortOrder;
   id?: SortOrder;
   orderId?: SortOrder;
+  trackingNumber?: SortOrder;
   updatedAt?: SortOrder;
 };

@@ -25,10 +25,9 @@ import { DeleteOrderArgs } from "./DeleteOrderArgs";
 import { OrderFindManyArgs } from "./OrderFindManyArgs";
 import { OrderFindUniqueArgs } from "./OrderFindUniqueArgs";
 import { Order } from "./Order";
-import { ShipmentFindManyArgs } from "../../shipment/base/ShipmentFindManyArgs";
-import { Shipment } from "../../shipment/base/Shipment";
 import { Customer } from "../../customer/base/Customer";
 import { Product } from "../../product/base/Product";
+import { Shipment } from "../../shipment/base/Shipment";
 import { OrderService } from "../order.service";
 
 @graphql.Resolver(() => Order)
@@ -110,6 +109,12 @@ export class OrderResolverBase {
               connect: args.data.product,
             }
           : undefined,
+
+        shipments: args.data.shipments
+          ? {
+              connect: args.data.shipments,
+            }
+          : undefined,
       },
     });
   }
@@ -139,6 +144,12 @@ export class OrderResolverBase {
           product: args.data.product
             ? {
                 connect: args.data.product,
+              }
+            : undefined,
+
+          shipments: args.data.shipments
+            ? {
+                connect: args.data.shipments,
               }
             : undefined,
         },
@@ -175,26 +186,6 @@ export class OrderResolverBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => [Shipment])
-  @nestAccessControl.UseRoles({
-    resource: "Shipment",
-    action: "read",
-    possession: "any",
-  })
-  async shipments(
-    @graphql.Parent() parent: Order,
-    @graphql.Args() args: ShipmentFindManyArgs
-  ): Promise<Shipment[]> {
-    const results = await this.service.findShipments(parent.id, args);
-
-    if (!results) {
-      return [];
-    }
-
-    return results;
-  }
-
-  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.ResolveField(() => Customer, { nullable: true })
   @nestAccessControl.UseRoles({
     resource: "Customer",
@@ -219,6 +210,22 @@ export class OrderResolverBase {
   })
   async product(@graphql.Parent() parent: Order): Promise<Product | null> {
     const result = await this.service.getProduct(parent.id);
+
+    if (!result) {
+      return null;
+    }
+    return result;
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => Shipment, { nullable: true })
+  @nestAccessControl.UseRoles({
+    resource: "Shipment",
+    action: "read",
+    possession: "any",
+  })
+  async shipments(@graphql.Parent() parent: Order): Promise<Shipment | null> {
+    const result = await this.service.getShipments(parent.id);
 
     if (!result) {
       return null;

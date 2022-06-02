@@ -18,7 +18,7 @@ import { FloatNullableFilter } from "../../util/FloatNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { ProductWhereUniqueInput } from "../../product/base/ProductWhereUniqueInput";
 import { IntNullableFilter } from "../../util/IntNullableFilter";
-import { ShipmentListRelationFilter } from "../../shipment/base/ShipmentListRelationFilter";
+import { ShipmentWhereUniqueInput } from "../../shipment/base/ShipmentWhereUniqueInput";
 @InputType()
 class OrderWhereInput {
   @ApiProperty({
@@ -80,15 +80,15 @@ class OrderWhereInput {
 
   @ApiProperty({
     required: false,
-    type: () => ShipmentListRelationFilter,
+    type: () => ShipmentWhereUniqueInput,
   })
   @ValidateNested()
-  @Type(() => ShipmentListRelationFilter)
+  @Type(() => ShipmentWhereUniqueInput)
   @IsOptional()
-  @Field(() => ShipmentListRelationFilter, {
+  @Field(() => ShipmentWhereUniqueInput, {
     nullable: true,
   })
-  shipments?: ShipmentListRelationFilter;
+  shipments?: ShipmentWhereUniqueInput;
 
   @ApiProperty({
     required: false,

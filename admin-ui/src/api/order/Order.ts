@@ -9,7 +9,7 @@ export type Order = {
   id: string;
   product?: Product | null;
   quantity: number | null;
-  shipments?: Array<Shipment>;
+  shipments?: Shipment | null;
   totalPrice: number | null;
   updatedAt: Date;
 };

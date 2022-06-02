@@ -27,9 +27,6 @@ import { OrderWhereUniqueInput } from "./OrderWhereUniqueInput";
 import { OrderFindManyArgs } from "./OrderFindManyArgs";
 import { OrderUpdateInput } from "./OrderUpdateInput";
 import { Order } from "./Order";
-import { ShipmentFindManyArgs } from "../../shipment/base/ShipmentFindManyArgs";
-import { Shipment } from "../../shipment/base/Shipment";
-import { ShipmentWhereUniqueInput } from "../../shipment/base/ShipmentWhereUniqueInput";
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class OrderControllerBase {
@@ -63,6 +60,12 @@ export class OrderControllerBase {
               connect: data.product,
             }
           : undefined,
+
+        shipments: data.shipments
+          ? {
+              connect: data.shipments,
+            }
+          : undefined,
       },
       select: {
         createdAt: true,
@@ -83,6 +86,13 @@ export class OrderControllerBase {
         },
 
         quantity: true,
+
+        shipments: {
+          select: {
+            id: true,
+          },
+        },
+
         totalPrice: true,
         updatedAt: true,
       },
@@ -122,6 +132,13 @@ export class OrderControllerBase {
         },
 
         quantity: true,
+
+        shipments: {
+          select: {
+            id: true,
+          },
+        },
+
         totalPrice: true,
         updatedAt: true,
       },
@@ -162,6 +179,13 @@ export class OrderControllerBase {
         },
 
         quantity: true,
+
+        shipments: {
+          select: {
+            id: true,
+          },
+        },
+
         totalPrice: true,
         updatedAt: true,
       },
@@ -205,6 +229,12 @@ export class OrderControllerBase {
                 connect: data.product,
               }
             : undefined,
+
+          shipments: data.shipments
+            ? {
+                connect: data.shipments,
+              }
+            : undefined,
         },
         select: {
           createdAt: true,
@@ -225,6 +255,13 @@ export class OrderControllerBase {
           },
 
           quantity: true,
+
+          shipments: {
+            select: {
+              id: true,
+            },
+          },
+
           totalPrice: true,
           updatedAt: true,
         },
@@ -273,6 +310,13 @@ export class OrderControllerBase {
           },
 
           quantity: true,
+
+          shipments: {
+            select: {
+              id: true,
+            },
+          },
+
           totalPrice: true,
           updatedAt: true,
         },
@@ -285,113 +329,5 @@ export class OrderControllerBase {
       }
       throw error;
     }
-  }
-
-  @common.UseInterceptors(AclFilterResponseInterceptor)
-  @nestAccessControl.UseRoles({
-    resource: "Shipment",
-    action: "read",
-    possession: "any",
-  })
-  @common.Get("/:id/shipments")
-  @ApiNestedQuery(ShipmentFindManyArgs)
-  async findManyShipments(
-    @common.Req() request: Request,
-    @common.Param() params: OrderWhereUniqueInput
-  ): Promise<Shipment[]> {
-    const query = plainToClass(ShipmentFindManyArgs, request.query);
-    const results = await this.service.findShipments(params.id, {
-      ...query,
-      select: {
-        address: {
-          select: {
-            id: true,
-          },
-        },
-
-        createdAt: true,
-        id: true,
-
-        order: {
-          select: {
-            id: true,
-          },
-        },
-
-        updatedAt: true,
-      },
-    });
-    if (results === null) {
-      throw new errors.NotFoundException(
-        `No resource was found for ${JSON.stringify(params)}`
-      );
-    }
-    return results;
-  }
-
-  @nestAccessControl.UseRoles({
-    resource: "Order",
-    action: "update",
-    possession: "any",
-  })
-  @common.Post("/:id/shipments")
-  async connectShipments(
-    @common.Param() params: OrderWhereUniqueInput,
-    @common.Body() body: ShipmentWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      shipments: {
-        connect: body,
-      },
-    };
-    await this.service.update({
-      where: params,
-      data,
-      select: { id: true },
-    });
-  }
-
-  @nestAccessControl.UseRoles({
-    resource: "Order",
-    action: "update",
-    possession: "any",
-  })
-  @common.Patch("/:id/shipments")
-  async updateShipments(
-    @common.Param() params: OrderWhereUniqueInput,
-    @common.Body() body: ShipmentWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      shipments: {
-        set: body,
-      },
-    };
-    await this.service.update({
-      where: params,
-      data,
-      select: { id: true },
-    });
-  }
-
-  @nestAccessControl.UseRoles({
-    resource: "Order",
-    action: "update",
-    possession: "any",
-  })
-  @common.Delete("/:id/shipments")
-  async disconnectShipments(
-    @common.Param() params: OrderWhereUniqueInput,
-    @common.Body() body: ShipmentWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      shipments: {
-        disconnect: body,
-      },
-    };
-    await this.service.update({
-      where: params,
-      data,
-      select: { id: true },
-    });
   }
 }

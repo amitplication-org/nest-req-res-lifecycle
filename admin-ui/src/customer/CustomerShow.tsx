@@ -13,6 +13,7 @@ import {
 
 import { CUSTOMER_TITLE_FIELD } from "./CustomerTitle";
 import { PRODUCT_TITLE_FIELD } from "../product/ProductTitle";
+import { SHIPMENT_TITLE_FIELD } from "../shipment/ShipmentTitle";
 import { ADDRESS_TITLE_FIELD } from "../address/AddressTitle";
 
 export const CustomerShow = (props: ShowProps): React.ReactElement => {
@@ -53,6 +54,13 @@ export const CustomerShow = (props: ShowProps): React.ReactElement => {
               <TextField source={PRODUCT_TITLE_FIELD} />
             </ReferenceField>
             <TextField label="Quantity" source="quantity" />
+            <ReferenceField
+              label="Shipments"
+              source="shipment.id"
+              reference="Shipment"
+            >
+              <TextField source={SHIPMENT_TITLE_FIELD} />
+            </ReferenceField>
             <TextField label="Total Price" source="totalPrice" />
             <DateField source="updatedAt" label="Updated At" />
           </Datagrid>

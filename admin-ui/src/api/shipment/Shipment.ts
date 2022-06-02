@@ -5,6 +5,7 @@ export type Shipment = {
   address?: Address | null;
   createdAt: Date;
   id: string;
-  order?: Order | null;
+  order?: Order;
+  trackingNumber: string | null;
   updatedAt: Date;
 };

@@ -83,12 +83,12 @@ class Order {
 
   @ApiProperty({
     required: false,
-    type: () => [Shipment],
+    type: () => Shipment,
   })
   @ValidateNested()
   @Type(() => Shipment)
   @IsOptional()
-  shipments?: Array<Shipment>;
+  shipments?: Shipment | null;
 
   @ApiProperty({
     required: false,
