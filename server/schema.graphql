@@ -9,6 +9,7 @@ type Address {
   createdAt: DateTime!
   customers(orderBy: [CustomerOrderByInput!], skip: Float, take: Float, where: CustomerWhereInput): [Customer!]!
   id: String!
+  shipments(orderBy: [ShipmentOrderByInput!], skip: Float, take: Float, where: ShipmentWhereInput): [Shipment!]!
   state: String
   updatedAt: DateTime!
   zip: Float
@@ -19,6 +20,7 @@ input AddressCreateInput {
   address_2: String
   city: String
   customers: CustomerCreateNestedManyWithoutAddressesInput
+  shipments: ShipmentCreateNestedManyWithoutAddressesInput
   state: String
   zip: Float
 }
@@ -39,6 +41,7 @@ input AddressUpdateInput {
   address_2: String
   city: String
   customers: CustomerUpdateManyWithoutAddressesInput
+  shipments: ShipmentUpdateManyWithoutAddressesInput
   state: String
   zip: Float
 }
@@ -49,6 +52,7 @@ input AddressWhereInput {
   city: StringNullableFilter
   customers: CustomerListRelationFilter
   id: StringFilter
+  shipments: ShipmentListRelationFilter
   state: StringNullableFilter
   zip: IntNullableFilter
 }
@@ -169,17 +173,20 @@ type Mutation {
   createCustomer(data: CustomerCreateInput!): Customer!
   createOrder(data: OrderCreateInput!): Order!
   createProduct(data: ProductCreateInput!): Product!
+  createShipment(data: ShipmentCreateInput!): Shipment!
   createUser(data: UserCreateInput!): User!
   deleteAddress(where: AddressWhereUniqueInput!): Address!
   deleteCustomer(where: CustomerWhereUniqueInput!): Customer!
   deleteOrder(where: OrderWhereUniqueInput!): Order!
   deleteProduct(where: ProductWhereUniqueInput!): Product!
+  deleteShipment(where: ShipmentWhereUniqueInput!): Shipment!
   deleteUser(where: UserWhereUniqueInput!): User!
   login(credentials: Credentials!): UserInfo!
   updateAddress(data: AddressUpdateInput!, where: AddressWhereUniqueInput!): Address!
   updateCustomer(data: CustomerUpdateInput!, where: CustomerWhereUniqueInput!): Customer!
   updateOrder(data: OrderUpdateInput!, where: OrderWhereUniqueInput!): Order!
   updateProduct(data: ProductUpdateInput!, where: ProductWhereUniqueInput!): Product!
+  updateShipment(data: ShipmentUpdateInput!, where: ShipmentWhereUniqueInput!): Shipment!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User!
 }
 
@@ -190,6 +197,7 @@ type Order {
   id: String!
   product: Product
   quantity: Float
+  shipments: Shipment
   totalPrice: Float
   updatedAt: DateTime!
 }
@@ -199,6 +207,7 @@ input OrderCreateInput {
   discount: Float
   product: ProductWhereUniqueInput
   quantity: Float
+  shipments: ShipmentWhereUniqueInput
   totalPrice: Float
 }
 
@@ -223,6 +232,7 @@ input OrderOrderByInput {
   id: SortOrder
   productId: SortOrder
   quantity: SortOrder
+  shipmentsId: SortOrder
   totalPrice: SortOrder
   updatedAt: SortOrder
 }
@@ -232,6 +242,7 @@ input OrderUpdateInput {
   discount: Float
   product: ProductWhereUniqueInput
   quantity: Float
+  shipments: ShipmentWhereUniqueInput
   totalPrice: Float
 }
 
@@ -253,6 +264,7 @@ input OrderWhereInput {
   id: StringFilter
   product: ProductWhereUniqueInput
   quantity: IntNullableFilter
+  shipments: ShipmentWhereUniqueInput
   totalPrice: IntNullableFilter
 }
 
@@ -310,6 +322,7 @@ type Query {
   _customersMeta(orderBy: [CustomerOrderByInput!], skip: Float, take: Float, where: CustomerWhereInput): MetaQueryPayload!
   _ordersMeta(orderBy: [OrderOrderByInput!], skip: Float, take: Float, where: OrderWhereInput): MetaQueryPayload!
   _productsMeta(orderBy: [ProductOrderByInput!], skip: Float, take: Float, where: ProductWhereInput): MetaQueryPayload!
+  _shipmentsMeta(orderBy: [ShipmentOrderByInput!], skip: Float, take: Float, where: ShipmentWhereInput): MetaQueryPayload!
   _usersMeta(orderBy: [UserOrderByInput!], skip: Float, take: Float, where: UserWhereInput): MetaQueryPayload!
   address(where: AddressWhereUniqueInput!): Address
   addresses(orderBy: [AddressOrderByInput!], skip: Float, take: Float, where: AddressWhereInput): [Address!]!
@@ -319,6 +332,8 @@ type Query {
   orders(orderBy: [OrderOrderByInput!], skip: Float, take: Float, where: OrderWhereInput): [Order!]!
   product(where: ProductWhereUniqueInput!): Product
   products(orderBy: [ProductOrderByInput!], skip: Float, take: Float, where: ProductWhereInput): [Product!]!
+  shipment(where: ShipmentWhereUniqueInput!): Shipment
+  shipments(orderBy: [ShipmentOrderByInput!], skip: Float, take: Float, where: ShipmentWhereInput): [Shipment!]!
   user(where: UserWhereUniqueInput!): User
   userInfo: UserInfo!
   users(orderBy: [UserOrderByInput!], skip: Float, take: Float, where: UserWhereInput): [User!]!
@@ -327,6 +342,63 @@ type Query {
 enum QueryMode {
   Default
   Insensitive
+}
+
+type Shipment {
+  address: Address
+  createdAt: DateTime!
+  id: String!
+  order: Order
+  trackingNumber: String
+  updatedAt: DateTime!
+}
+
+input ShipmentCreateInput {
+  address: AddressWhereUniqueInput
+  order: OrderWhereUniqueInput
+  trackingNumber: String
+}
+
+input ShipmentCreateNestedManyWithoutAddressesInput {
+  connect: [ShipmentWhereUniqueInput!]
+}
+
+input ShipmentListRelationFilter {
+  every: ShipmentWhereInput
+  none: ShipmentWhereInput
+  some: ShipmentWhereInput
+}
+
+input ShipmentOrderByInput {
+  addressId: SortOrder
+  createdAt: SortOrder
+  id: SortOrder
+  orderId: SortOrder
+  trackingNumber: SortOrder
+  updatedAt: SortOrder
+}
+
+input ShipmentUpdateInput {
+  address: AddressWhereUniqueInput
+  order: OrderWhereUniqueInput
+  trackingNumber: String
+}
+
+input ShipmentUpdateManyWithoutAddressesInput {
+  connect: [ShipmentWhereUniqueInput!]
+  disconnect: [ShipmentWhereUniqueInput!]
+  set: [ShipmentWhereUniqueInput!]
+}
+
+input ShipmentWhereInput {
+  address: AddressWhereUniqueInput
+  id: StringFilter
+  order: OrderWhereUniqueInput
+  trackingNumber: StringNullableFilter
+}
+
+input ShipmentWhereUniqueInput {
+  id: String!
 }
 
 enum SortOrder {
