@@ -1,8 +1,20 @@
 [
   {
+    "role": "mufasa",
+    "resource": "User",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
     "role": "user",
     "resource": "User",
     "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "mufasa",
+    "resource": "User",
+    "action": "create:any",
     "attributes": "*"
   },
   {
@@ -12,7 +24,7 @@
     "attributes": "*"
   },
   {
-    "role": "user",
+    "role": "mufasa",
     "resource": "User",
     "action": "update:any",
     "attributes": "*"
@@ -20,7 +32,25 @@
   {
     "role": "user",
     "resource": "User",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "mufasa",
+    "resource": "User",
     "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "User",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "mufasa",
+    "resource": "User",
+    "action": "read:any",
     "attributes": "*"
   },
   {
@@ -30,9 +60,21 @@
     "attributes": "*"
   },
   {
+    "role": "mufasa",
+    "resource": "Order",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
     "role": "user",
     "resource": "Order",
     "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "mufasa",
+    "resource": "Order",
+    "action": "create:any",
     "attributes": "*"
   },
   {
@@ -42,9 +84,21 @@
     "attributes": "*"
   },
   {
+    "role": "mufasa",
+    "resource": "Order",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
     "role": "user",
     "resource": "Order",
     "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "mufasa",
+    "resource": "Order",
+    "action": "delete:any",
     "attributes": "*"
   },
   {
@@ -54,9 +108,21 @@
     "attributes": "*"
   },
   {
+    "role": "mufasa",
+    "resource": "Order",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
     "role": "user",
     "resource": "Order",
     "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "mufasa",
+    "resource": "Customer",
+    "action": "read:own",
     "attributes": "*"
   },
   {
@@ -66,9 +132,21 @@
     "attributes": "*"
   },
   {
+    "role": "mufasa",
+    "resource": "Customer",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
     "role": "user",
     "resource": "Customer",
     "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "mufasa",
+    "resource": "Customer",
+    "action": "update:any",
     "attributes": "*"
   },
   {
@@ -78,7 +156,7 @@
     "attributes": "*"
   },
   {
-    "role": "user",
+    "role": "mufasa",
     "resource": "Customer",
     "action": "delete:any",
     "attributes": "*"
@@ -86,7 +164,25 @@
   {
     "role": "user",
     "resource": "Customer",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "mufasa",
+    "resource": "Customer",
     "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Customer",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "mufasa",
+    "resource": "Address",
+    "action": "read:own",
     "attributes": "*"
   },
   {
@@ -96,9 +192,21 @@
     "attributes": "*"
   },
   {
+    "role": "mufasa",
+    "resource": "Address",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
     "role": "user",
     "resource": "Address",
     "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "mufasa",
+    "resource": "Address",
+    "action": "update:any",
     "attributes": "*"
   },
   {
@@ -108,7 +216,7 @@
     "attributes": "*"
   },
   {
-    "role": "user",
+    "role": "mufasa",
     "resource": "Address",
     "action": "delete:any",
     "attributes": "*"
@@ -116,7 +224,25 @@
   {
     "role": "user",
     "resource": "Address",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "mufasa",
+    "resource": "Address",
     "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Address",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "mufasa",
+    "resource": "Product",
+    "action": "read:own",
     "attributes": "*"
   },
   {
@@ -126,7 +252,7 @@
     "attributes": "*"
   },
   {
-    "role": "user",
+    "role": "mufasa",
     "resource": "Product",
     "action": "create:any",
     "attributes": "*"
@@ -134,13 +260,31 @@
   {
     "role": "user",
     "resource": "Product",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "mufasa",
+    "resource": "Product",
     "action": "update:any",
     "attributes": "*"
   },
   {
     "role": "user",
     "resource": "Product",
+    "action": "update:any",
+    "attributes": "*,!itemPrice"
+  },
+  {
+    "role": "mufasa",
+    "resource": "Product",
     "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "mufasa",
+    "resource": "Product",
+    "action": "read:any",
     "attributes": "*"
   },
   {
@@ -150,7 +294,7 @@
     "attributes": "*"
   },
   {
-    "role": "user",
+    "role": "mufasa",
     "resource": "Shipment",
     "action": "read:own",
     "attributes": "*"
@@ -158,7 +302,25 @@
   {
     "role": "user",
     "resource": "Shipment",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "mufasa",
+    "resource": "Shipment",
     "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Shipment",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "mufasa",
+    "resource": "Shipment",
+    "action": "update:any",
     "attributes": "*"
   },
   {
@@ -168,9 +330,21 @@
     "attributes": "*"
   },
   {
+    "role": "mufasa",
+    "resource": "Shipment",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
     "role": "user",
     "resource": "Shipment",
     "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "mufasa",
+    "resource": "Shipment",
+    "action": "read:any",
     "attributes": "*"
   },
   {
