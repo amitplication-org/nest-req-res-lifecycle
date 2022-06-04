@@ -242,18 +242,6 @@
   {
     "role": "mufasa",
     "resource": "Product",
-    "action": "read:own",
-    "attributes": "*"
-  },
-  {
-    "role": "user",
-    "resource": "Product",
-    "action": "read:own",
-    "attributes": "*"
-  },
-  {
-    "role": "mufasa",
-    "resource": "Product",
     "action": "create:any",
     "attributes": "*"
   },
@@ -279,18 +267,6 @@
     "role": "mufasa",
     "resource": "Product",
     "action": "delete:any",
-    "attributes": "*"
-  },
-  {
-    "role": "mufasa",
-    "resource": "Product",
-    "action": "read:any",
-    "attributes": "*"
-  },
-  {
-    "role": "user",
-    "resource": "Product",
-    "action": "read:any",
     "attributes": "*"
   },
   {

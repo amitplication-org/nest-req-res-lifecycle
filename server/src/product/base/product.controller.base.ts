@@ -20,6 +20,7 @@ import { plainToClass } from "class-transformer";
 import { ApiNestedQuery } from "../../decorators/api-nested-query.decorator";
 import { ProductService } from "../product.service";
 import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
+import { Public } from "../../decorators/public.decorator";
 import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
 import { ProductCreateInput } from "./ProductCreateInput";
 import { ProductWhereInput } from "./ProductWhereInput";
@@ -61,12 +62,7 @@ export class ProductControllerBase {
     });
   }
 
-  @common.UseInterceptors(AclFilterResponseInterceptor)
-  @nestAccessControl.UseRoles({
-    resource: "Product",
-    action: "read",
-    possession: "any",
-  })
+  @Public()
   @common.Get()
   @swagger.ApiOkResponse({ type: [Product] })
   @swagger.ApiForbiddenResponse()
@@ -86,12 +82,7 @@ export class ProductControllerBase {
     });
   }
 
-  @common.UseInterceptors(AclFilterResponseInterceptor)
-  @nestAccessControl.UseRoles({
-    resource: "Product",
-    action: "read",
-    possession: "own",
-  })
+  @Public()
   @common.Get("/:id")
   @swagger.ApiOkResponse({ type: Product })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
