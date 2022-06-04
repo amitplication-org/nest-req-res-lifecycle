@@ -44,6 +44,7 @@ export class ShipmentControllerBase {
   @common.Post()
   @swagger.ApiCreatedResponse({ type: Shipment })
   @swagger.ApiForbiddenResponse({ type: errors.ForbiddenException })
+  @swagger.ApiHeader({ name: "shipmentnumber" })
   async create(@common.Body() data: ShipmentCreateInput): Promise<Shipment> {
     return await this.service.create({
       data: {
@@ -92,6 +93,7 @@ export class ShipmentControllerBase {
   @common.Get()
   @swagger.ApiOkResponse({ type: [Shipment] })
   @swagger.ApiForbiddenResponse()
+  @swagger.ApiHeader({ name: "shipmentnumber" })
   @ApiNestedQuery(ShipmentFindManyArgs)
   async findMany(@common.Req() request: Request): Promise<Shipment[]> {
     const args = plainToClass(ShipmentFindManyArgs, request.query);
