@@ -189,7 +189,7 @@
     "role": "user",
     "resource": "Address",
     "action": "read:own",
-    "attributes": "*"
+    "attributes": "*,!address_1,!address_2"
   },
   {
     "role": "mufasa",
@@ -237,7 +237,7 @@
     "role": "user",
     "resource": "Address",
     "action": "read:any",
-    "attributes": "*"
+    "attributes": "*,!address_1,!address_2"
   },
   {
     "role": "mufasa",
