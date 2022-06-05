@@ -11,7 +11,7 @@ https://docs.amplication.com/docs/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsString } from "class-validator";
+import { IsOptional, IsString } from "class-validator";
 @InputType()
 class UserWhereUniqueInput {
   @ApiProperty({
@@ -26,6 +26,7 @@ class UserWhereUniqueInput {
     required: false,
     type: String,
   })
+  @IsOptional()
   @IsString()
   @Field(() => String)
   username?: string;
