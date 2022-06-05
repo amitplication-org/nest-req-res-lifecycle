@@ -488,4 +488,5 @@ input UserWhereInput {
 
 input UserWhereUniqueInput {
   id: String!
+  username: String!
 }

@@ -15,11 +15,19 @@ import { IsString } from "class-validator";
 @InputType()
 class UserWhereUniqueInput {
   @ApiProperty({
-    required: true,
+    required: false,
     type: String,
   })
   @IsString()
   @Field(() => String)
-  id!: string;
+  id?: string;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @Field(() => String)
+  username?: string;
 }
 export { UserWhereUniqueInput };
