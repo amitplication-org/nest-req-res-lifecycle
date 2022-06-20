@@ -27,9 +27,6 @@ import { UserWhereUniqueInput } from "./UserWhereUniqueInput";
 import { UserFindManyArgs } from "./UserFindManyArgs";
 import { UserUpdateInput } from "./UserUpdateInput";
 import { User } from "./User";
-import { HttpExceptionFilter } from "src/exception-filters/http-exception.filter";
-import { ConflictException } from "@nestjs/common";
-import { UserWhereUniqueInputs } from "../dtos/UserWhereUniqueInputs";
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class UserControllerBase {
@@ -45,14 +42,9 @@ export class UserControllerBase {
     possession: "any",
   })
   @common.Post()
-  @common.UseFilters(HttpExceptionFilter)
   @swagger.ApiCreatedResponse({ type: User })
   @swagger.ApiForbiddenResponse({ type: errors.ForbiddenException })
   async create(@common.Body() data: UserCreateInput): Promise<User> {
-    const user = await this.findOne({ username: data.username });
-    if (user) {
-      throw new ConflictException();
-    }
     return await this.service.create({
       data: data,
       select: {
@@ -104,7 +96,7 @@ export class UserControllerBase {
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
   @swagger.ApiForbiddenResponse({ type: errors.ForbiddenException })
   async findOne(
-    @common.Param() params: UserWhereUniqueInputs
+    @common.Param() params: UserWhereUniqueInput
   ): Promise<User | null> {
     const result = await this.service.findOne({
       where: params,
