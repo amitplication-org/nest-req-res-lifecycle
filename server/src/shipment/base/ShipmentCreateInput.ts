@@ -39,7 +39,7 @@ class ShipmentCreateInput {
   @Field(() => OrderWhereUniqueInput, {
     nullable: true,
   })
-  order?: OrderWhereUniqueInput;
+  order?: OrderWhereUniqueInput | null;
 
   @ApiProperty({
     required: false,

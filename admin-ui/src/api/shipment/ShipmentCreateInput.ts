@@ -3,6 +3,6 @@ import { OrderWhereUniqueInput } from "../order/OrderWhereUniqueInput";
 
 export type ShipmentCreateInput = {
   address?: AddressWhereUniqueInput | null;
-  order?: OrderWhereUniqueInput;
+  order?: OrderWhereUniqueInput | null;
   trackingNumber?: string | null;
 };

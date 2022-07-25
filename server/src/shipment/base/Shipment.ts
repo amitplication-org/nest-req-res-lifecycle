@@ -49,7 +49,7 @@ class Shipment {
   @ValidateNested()
   @Type(() => Order)
   @IsOptional()
-  order?: Order;
+  order?: Order | null;
 
   @ApiProperty({
     required: false,

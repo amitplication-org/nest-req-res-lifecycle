@@ -28,7 +28,7 @@ model Order {
   productId   String?
   quantity    Int?
   shipments   Shipment? @relation(fields: [shipmentsId], references: [id])
-  shipmentsId String?
+  shipmentsId String?   @unique
   totalPrice  Int?
   updatedAt   DateTime  @updatedAt
 }
