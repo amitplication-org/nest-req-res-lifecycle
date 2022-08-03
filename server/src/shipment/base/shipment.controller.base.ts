@@ -55,11 +55,9 @@ export class ShipmentControllerBase {
             }
           : undefined,
 
-        order: data.order
-          ? {
-              connect: data.order,
-            }
-          : undefined,
+        order: {
+          connect: data.order,
+        },
       },
       select: {
         address: {
@@ -188,11 +186,9 @@ export class ShipmentControllerBase {
               }
             : undefined,
 
-          order: data.order
-            ? {
-                connect: data.order,
-              }
-            : undefined,
+          order: {
+            connect: data.order,
+          },
         },
         select: {
           address: {
