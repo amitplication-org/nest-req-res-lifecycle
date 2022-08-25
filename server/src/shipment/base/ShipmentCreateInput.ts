@@ -30,16 +30,13 @@ class ShipmentCreateInput {
   address?: AddressWhereUniqueInput | null;
 
   @ApiProperty({
-    required: false,
+    required: true,
     type: () => OrderWhereUniqueInput,
   })
   @ValidateNested()
   @Type(() => OrderWhereUniqueInput)
-  @IsOptional()
-  @Field(() => OrderWhereUniqueInput, {
-    nullable: true,
-  })
-  order?: OrderWhereUniqueInput | null;
+  @Field(() => OrderWhereUniqueInput)
+  order!: OrderWhereUniqueInput | null;
 
   @ApiProperty({
     required: false,

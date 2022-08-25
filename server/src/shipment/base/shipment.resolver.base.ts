@@ -107,11 +107,9 @@ export class ShipmentResolverBase {
             }
           : undefined,
 
-        order: args.data.order
-          ? {
-              connect: args.data.order,
-            }
-          : undefined,
+        order: {
+          connect: args.data.order,
+        },
       },
     });
   }
@@ -138,11 +136,9 @@ export class ShipmentResolverBase {
               }
             : undefined,
 
-          order: args.data.order
-            ? {
-                connect: args.data.order,
-              }
-            : undefined,
+          order: {
+            connect: args.data.order,
+          },
         },
       });
     } catch (error) {
